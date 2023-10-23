@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
+import styles from "./Style/Signup.module.css";
 
 const SignUpForm = () => {
   const [formData, setFormData] = useState({
@@ -8,6 +9,8 @@ const SignUpForm = () => {
   });
   const [otpSent, setOtpSent] = useState(false);
   const [otp, setOtp] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -19,22 +22,26 @@ const SignUpForm = () => {
   };
 
   const handleSendOtp = () => {
-    // Send OTP to the user's email address (implement this function)
+    setLoading(true);
     axios
-      .post("https://codinground.onrender.com/api/send-otp", { email: formData.email })
+      .post("https://codinground.onrender.com/api/send-otp", {
+        email: formData.email,
+      })
       .then((response) => {
         setOtpSent(true);
+        setLoading(false);
         console.log(response.data);
       })
       .catch((error) => {
-        // Handle error
         console.error("Error sending OTP:", error);
+        setError("Error sending OTP. Please try again.");
+        setLoading(false);
       });
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Verify the OTP entered by the user (implement this function)
+    setLoading(true);
     axios
       .post("https://codinground.onrender.com/api/verify-otp", {
         name: formData.name,
@@ -47,45 +54,63 @@ const SignUpForm = () => {
           response.data
         );
         localStorage.setItem("userId", response.data.id);
+        setLoading(false);
         window.location.href = "/#/home";
       })
       .catch((error) => {
-        // Handle error
         console.error("Error verifying OTP:", error);
+        setError("Invalid OTP. Please try again.");
+        setLoading(false);
       });
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <label>
-        Name:
-        <input
-          type="text"
-          name="name"
-          value={formData.name}
-          onChange={handleInputChange}
-        />
-      </label>
-      <label>
-        Email:
-        <input
-          type="email"
-          name="email"
-          value={formData.email}
-          onChange={handleInputChange}
-        />
-      </label>
+    <form onSubmit={handleSubmit} className={styles.container}>
+      <h1 className={styles.heading}>Sign Up</h1>
+      {error && <p className={styles.error}>{error}</p>}
+      <input
+        className={styles.input}
+        type="text"
+        name="name"
+        placeholder="Name"
+        value={formData.name}
+        disabled={loading}
+        onChange={handleInputChange}
+        required
+      />
+      <input
+        className={styles.input}
+        type="email"
+        name="email"
+        placeholder="Email"
+        value={formData.email}
+        disabled={loading}
+        onChange={handleInputChange}
+        required
+      />
       {!otpSent ? (
-        <button type="button" onClick={handleSendOtp}>
-          Send OTP
+        <button
+          type="button"
+          onClick={handleSendOtp}
+          className={styles.button}
+          disabled={loading}
+        >
+          {loading && "Loading..."}
+          {!loading && "Send OTP"}
         </button>
       ) : (
-        <div>
-          <label>
-            OTP:
-            <input type="text" value={otp} onChange={handleOtpChange} />
-          </label>
-          <button type="submit">Verify and Sign Up</button>
+        <div className={styles.secondCont}>
+          <input
+            type="text"
+            value={otp}
+            onChange={handleOtpChange}
+            placeholder="OTP"
+            className={styles.input}
+          />
+          <button className={styles.button} type="submit" disabled={loading}>
+            {loading && "Loading..."}
+            {!loading && "Verify and Sign Up"}
+          </button>
         </div>
       )}
     </form>

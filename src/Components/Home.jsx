@@ -16,11 +16,11 @@ const Home = () => {
       })
       .then((response) => {
         console.log("Topic posted:", response.data);
+        window.location.href="/#/home"
         // Handle success, e.g., update UI, show notifications, etc.
       })
       .catch((error) => {
         console.error("Error posting topic:", error);
-        // Handle error, e.g., show error messages to the user
       });
   };
 
@@ -45,7 +45,9 @@ const Home = () => {
           onChange={(e) => setTopicContent(e.target.value)}
           placeholder="Enter your topic here..."
         />
-        <button className={styles.button} onClick={handlePostTopic}>Post Topic</button>
+        <button className={styles.button} onClick={handlePostTopic}>
+          Post Topic
+        </button>
       </div>
       <h1>All Topics</h1>
       {topics.map((topic) => (

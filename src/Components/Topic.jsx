@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import Comment from "./Comment";
+import styles from "./Style/Topic.module.css";
 
 const Topic = ({ topic }) => {
   const [commentContent, setCommentContent] = useState("");
@@ -10,10 +11,13 @@ const Topic = ({ topic }) => {
     const userId = localStorage.getItem("userId");
 
     axios
-      .post(`https://codinground.onrender.com/api/topics/${topic._id}/comments`, {
-        userId,
-        content: commentContent,
-      })
+      .post(
+        `https://codinground.onrender.com/api/topics/${topic._id}/comments`,
+        {
+          userId,
+          content: commentContent,
+        }
+      )
       .then((response) => {
         setComments([...comments, response.data]);
         setCommentContent("");
@@ -34,8 +38,8 @@ const Topic = ({ topic }) => {
   };
 
   return (
-    <div>
-      <p>{topic.content}</p>
+    <div className={styles.topic}>
+      <p className={styles.topicContent}>{topic.content}</p>
       {comments.map((comment) => (
         <Comment
           key={comment._id}
@@ -45,11 +49,14 @@ const Topic = ({ topic }) => {
         />
       ))}
       <textarea
+        className={styles.commentInput}
         value={commentContent}
         onChange={(e) => setCommentContent(e.target.value)}
         placeholder="Comment on this topic..."
       />
-      <button onClick={handlePostComment}>Post Comment</button>
+      <button onClick={handlePostComment} className={styles.button}>
+        Post Comment
+      </button>
     </div>
   );
 };

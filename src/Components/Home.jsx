@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import Topic from "./Topic"; // Import the Topic component
+import Topic from "./Topic";
+import styles from "./Style/Home.module.css";
 
 const Home = () => {
   const [topics, setTopics] = useState([]);
@@ -35,21 +36,20 @@ const Home = () => {
   }, []);
 
   return (
-    <div>
-      <h1>Post a New Topic</h1>
-      <div>
+    <div className={styles.container}>
+      <div className={styles.topicContainer}>
         <h2>Post a New Topic</h2>
         <textarea
+          className={styles.textarea}
           value={topicContent}
           onChange={(e) => setTopicContent(e.target.value)}
           placeholder="Enter your topic here..."
         />
-        <button onClick={handlePostTopic}>Post Topic</button>
+        <button className={styles.button} onClick={handlePostTopic}>Post Topic</button>
       </div>
       <h1>All Topics</h1>
       {topics.map((topic) => (
         <div key={topic._id}>
-          {/* Use the Topic component to render each topic */}
           <Topic topic={topic} />
         </div>
       ))}

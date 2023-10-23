@@ -10,7 +10,7 @@ const Home = () => {
 
   const handlePostTopic = () => {
     axios
-      .post("http://localhost:3000/api/topics", {
+      .post("https://codinground.onrender.com/api/topics", {
         userId,
         content: topicContent,
       })
@@ -26,7 +26,7 @@ const Home = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:3000/api/topics")
+      .get("https://codinground.onrender.com/api/topics")
       .then((response) => {
         setTopics(response.data);
       })

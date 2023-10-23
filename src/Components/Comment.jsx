@@ -9,7 +9,7 @@ const Comment = ({ comment, topicId }) => {
 
     axios
       .post(
-        `http://localhost:3000/api/topics/${topicId}/comments/${comment._id}/replies`,
+        `https://codinground.onrender.com/api/topics/${topicId}/comments/${comment._id}/replies`,
         {
           userId,
           content: replyContent,

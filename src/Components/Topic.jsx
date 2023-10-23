@@ -10,7 +10,7 @@ const Topic = ({ topic }) => {
     const userId = localStorage.getItem("userId");
 
     axios
-      .post(`http://localhost:3000/api/topics/${topic._id}/comments`, {
+      .post(`https://codinground.onrender.com/api/topics/${topic._id}/comments`, {
         userId,
         content: commentContent,
       })

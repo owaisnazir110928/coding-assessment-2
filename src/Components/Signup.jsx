@@ -21,7 +21,7 @@ const SignUpForm = () => {
   const handleSendOtp = () => {
     // Send OTP to the user's email address (implement this function)
     axios
-      .post("http://localhost:3000/api/send-otp", { email: formData.email })
+      .post("https://codinground.onrender.com/api/send-otp", { email: formData.email })
       .then((response) => {
         setOtpSent(true);
         console.log(response.data);
@@ -36,7 +36,7 @@ const SignUpForm = () => {
     e.preventDefault();
     // Verify the OTP entered by the user (implement this function)
     axios
-      .post("http://localhost:3000/api/verify-otp", {
+      .post("https://codinground.onrender.com/api/verify-otp", {
         name: formData.name,
         email: formData.email,
         otp,

@@ -16,7 +16,7 @@ const Home = () => {
       })
       .then((response) => {
         console.log("Topic posted:", response.data);
-        window.location.reload()
+        window.location.reload();
       })
       .catch((error) => {
         console.error("Error posting topic:", error);
@@ -27,7 +27,7 @@ const Home = () => {
     axios
       .get("https://codinground.onrender.com/api/topics")
       .then((response) => {
-        setTopics(response.data);
+        setTopics(response.data.reverse());
       })
       .catch((error) => {
         console.error("Error fetching topics:", error);
@@ -42,18 +42,20 @@ const Home = () => {
           className={styles.textarea}
           value={topicContent}
           onChange={(e) => setTopicContent(e.target.value)}
-          placeholder="Enter your topic here..."
+          placeholder="What's on Your Mind..."
         />
         <button className={styles.button} onClick={handlePostTopic}>
           Post Topic
         </button>
       </div>
-      <h1>All Topics</h1>
-      {topics.map((topic) => (
-        <div key={topic._id}>
-          <Topic topic={topic} />
-        </div>
-      ))}
+      <div className={styles.allTopics}>
+        <h1 className={styles.heading}>All Topics</h1>
+        {topics.map((topic) => (
+          <div key={topic._id}>
+            <Topic topic={topic} />
+          </div>
+        ))}
+      </div>
     </div>
   );
 };

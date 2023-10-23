@@ -17,7 +17,7 @@ const Comment = ({ comment, topicId }) => {
       )
       .then((response) => {
         console.log("Reply posted:", response.data);
-        setReplyContent("");
+        setReplyContent("");window.location.reload()
       })
       .catch((error) => {
         console.error("Error posting reply:", error);

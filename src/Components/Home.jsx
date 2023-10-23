@@ -16,7 +16,7 @@ const Home = () => {
       })
       .then((response) => {
         console.log("Topic posted:", response.data);
-        window.location.href = "/#/home";
+        window.location.reload()
       })
       .catch((error) => {
         console.error("Error posting topic:", error);

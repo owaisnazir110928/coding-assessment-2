@@ -50,10 +50,10 @@ const Topic = ({ topic }) => {
         }}
       >
         <img src={cmtIcon} alt="icon" className={styles.icon} />
-        {" View Comments"}
+        {` View Comments (${comments.length})`}
       </div>
       {viewComments && (
-        <>
+        <div className={styles.commentContainer}>
           {" "}
           {comments.map((comment) => (
             <Comment
@@ -63,6 +63,7 @@ const Topic = ({ topic }) => {
               topicId={topic._id.toString()}
             />
           ))}
+          <div className={styles.commentInputContainer}>
           <textarea
             className={styles.commentInput}
             value={commentContent}
@@ -72,7 +73,8 @@ const Topic = ({ topic }) => {
           <button onClick={handlePostComment} className={styles.button}>
             Post Comment
           </button>
-        </>
+          </div>
+        </div>
       )}
     </div>
   );

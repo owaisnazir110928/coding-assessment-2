@@ -77,3 +77,7 @@
     color: #4796ff;
     cursor: pointer;
 }
+
+.otpInput{
+    width: 100%;
+}

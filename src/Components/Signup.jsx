@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import OtpInput from "react-otp-input";
 import axios from "axios";
 import styles from "./Style/Signup.module.css";
 
@@ -105,12 +106,23 @@ const SignUpForm = () => {
         </button>
       ) : (
         <div className={styles.secondCont}>
-          <input
-            type="text"
+          <OtpInput
+            inputStyle={{
+              width: "80px",
+              height: "45px",
+              fontSize: "18px",
+              marginInline: "10px",
+              borderRadius: "6px",
+              borderWidth: "0.5px",
+              borderColor: "green",
+              outline: "none",
+              marginBottom: "5px",
+            }}
             value={otp}
-            onChange={handleOtpChange}
-            placeholder="OTP"
-            className={styles.input}
+            onChange={setOtp}
+            numInputs={4}
+            renderSeparator={<span> </span>}
+            renderInput={(props) => <input {...props} />}
           />
           <button className={styles.button} type="submit" disabled={loading}>
             {loading && "Loading..."}

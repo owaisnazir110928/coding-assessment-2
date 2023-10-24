@@ -33,7 +33,7 @@ const CommentedPosts = () => {
       <div className={styles.container}>
         <div className={styles.allTopics}>
           <h1 className={styles.heading}>Commented Posts</h1>
-          <p>Sorted by Comments</p>
+          <p className={styles.subHeading}>Sorted by Most Commented</p>
           {loading && (
             <div className={styles.loader}>
               <Discuss

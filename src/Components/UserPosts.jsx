@@ -15,9 +15,9 @@ const UserPosts = () => {
     axios
       .get("https://codinground.onrender.com/api/topics")
       .then((response) => {
-        const userTopics = response.data.filter(
-          (topic) => topic.user._id === userId
-        );
+        const userTopics = response.data.filter((topic) => {
+          topic.user._id == userId;
+        });
         setTopics(userTopics.reverse());
         setLoading(false);
       })
@@ -33,7 +33,7 @@ const UserPosts = () => {
       <div className={styles.container}>
         <div className={styles.allTopics}>
           <h1 className={styles.heading}>My Posts</h1>
-          <p>Sorted by Comments</p>
+          <p>Sorted by Most Commented</p>
           {loading && (
             <div className={styles.loader}>
               <Discuss

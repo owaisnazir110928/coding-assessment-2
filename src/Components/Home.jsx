@@ -16,11 +16,7 @@ const Home = () => {
       })
       .then((response) => {
         console.log("Topic posted:", response.data);
-
-        // Update the local state with the new topic
         setTopics([response.data, ...topics]);
-
-        // Clear the topic content input field
         setTopicContent("");
       })
       .catch((error) => {
@@ -33,7 +29,6 @@ const Home = () => {
       .get("https://codinground.onrender.com/api/topics")
       .then((response) => {
         setTopics(response.data.reverse());
-        console.log(response.data[0]);
       })
       .catch((error) => {
         console.error("Error fetching topics:", error);

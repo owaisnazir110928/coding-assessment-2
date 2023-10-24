@@ -88,7 +88,7 @@ const SignUpForm = () => {
         onChange={handleInputChange}
         required
       />
-      {otpSent && <p className={styles.success}>{"OTP Sent Successfully"}</p>}
+      {otpSent && <p className={styles.success}>{"OTP Sent Successfully. Valid for 2 mins"}</p>}
       {!otpSent ? (
         <button
           type="button"

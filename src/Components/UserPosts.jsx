@@ -28,7 +28,7 @@ const UserPosts = () => {
       <div className={styles.container}>
         <div className={styles.allTopics}>
           <h1 className={styles.heading}>My Posts</h1>
-          <p>Sorted by Most Commented</p>
+          <p>Sorted by Newest First</p>
           {loading && (
             <div className={styles.loader}>
               <Discuss

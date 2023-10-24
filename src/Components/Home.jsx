@@ -49,7 +49,7 @@ const Home = () => {
         </button>
       </div>
       <div className={styles.allTopics}>
-        <h1 className={styles.heading}>All Topics</h1>
+        <h1 className={styles.heading}>Home</h1>
         {topics.map((topic) => (
           <div key={topic._id}>
             <Topic topic={topic} />

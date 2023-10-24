@@ -2,10 +2,11 @@
     display: flex;
     justify-content: center;
     flex-direction: column;
-    width: 800px;
+    width: 650px;
     margin-bottom: 30px;
     padding: 20px;
     text-align: left;
+    border-bottom: 1px solid grey;
 }
 
 .topicContent {
@@ -36,4 +37,16 @@
 
 .button:hover {
     background-color: #0056b3;
+}
+
+.icon {
+    width: 20px;
+}
+
+.iconContainer {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    gap: 5px;
+    margin-top: 6px;
 }

@@ -2,10 +2,12 @@ import React, { useState } from "react";
 import axios from "axios";
 import Comment from "./Comment";
 import styles from "./Style/Topic.module.css";
+import cmtIcon from "../assets/comment.svg";
 
 const Topic = ({ topic }) => {
   const [commentContent, setCommentContent] = useState("");
   const [comments, setComments] = useState(topic.comments);
+  const [viewComments, setViewComments] = useState(false);
 
   const handlePostComment = () => {
     const userId = localStorage.getItem("userId");
@@ -39,24 +41,39 @@ const Topic = ({ topic }) => {
 
   return (
     <div className={styles.topic}>
+      <h1>{topic.user.name}</h1>
       <p className={styles.topicContent}>{topic.content}</p>
-      {comments.map((comment) => (
-        <Comment
-          key={comment._id}
-          comment={comment}
-          postReply={handlePostReply}
-          topicId={topic._id.toString()}
-        />
-      ))}
-      <textarea
-        className={styles.commentInput}
-        value={commentContent}
-        onChange={(e) => setCommentContent(e.target.value)}
-        placeholder="Comment on this topic..."
-      />
-      <button onClick={handlePostComment} className={styles.button}>
-        Post Comment
-      </button>
+      <div
+        className={styles.iconContainer}
+        onClick={() => {
+          setViewComments(!viewComments);
+        }}
+      >
+        <img src={cmtIcon} alt="icon" className={styles.icon} />
+        {" View Comments"}
+      </div>
+      {viewComments && (
+        <>
+          {" "}
+          {comments.map((comment) => (
+            <Comment
+              key={comment._id}
+              comment={comment}
+              postReply={handlePostReply}
+              topicId={topic._id.toString()}
+            />
+          ))}
+          <textarea
+            className={styles.commentInput}
+            value={commentContent}
+            onChange={(e) => setCommentContent(e.target.value)}
+            placeholder="Comment on this topic..."
+          />
+          <button onClick={handlePostComment} className={styles.button}>
+            Post Comment
+          </button>
+        </>
+      )}
     </div>
   );
 };

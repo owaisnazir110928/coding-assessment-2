@@ -76,20 +76,16 @@ app.post("/api/send-otp", (req, res) => {
 
   transporter.sendMail(mailOptions, (error, info) => {
     if (error) {
-      // Handle error
       console.error("Error sending email:", error);
       res.status(500).json({ error: "Failed to send OTP" });
     } else {
-      // Save the OTP code to the database for verification
       const otp = new OTP({ email, code: otpCode });
       otp
         .save()
         .then(() => {
-          // OTP sent successfully
           res.json({ message: "OTP sent successfully" });
         })
         .catch((error) => {
-          // Handle error
           console.error("Error saving OTP to the database:", error);
           res.status(500).json({ error: "Failed to send OTP" });
         });
@@ -101,17 +97,14 @@ app.post("/api/verify-otp", (req, res) => {
   OTP.findOne({ email, code: otp })
     .then((otpRecord) => {
       if (otpRecord) {
-        // OTP verified, check if the user already exists
         User.findOne({ email })
           .then((existingUser) => {
             if (existingUser) {
-              // User already exists, send a message indicating that the user is already verified
               res.json({
                 message: "User is already verified",
                 id: existingUser._id,
               });
             } else {
-              // User does not exist, save the user in the database
               const newUser = new User({ name, email, verified: true });
               newUser
                 .save()
@@ -122,30 +115,26 @@ app.post("/api/verify-otp", (req, res) => {
                   });
                 })
                 .catch((error) => {
-                  // Handle error while saving user
                   res.status(500).json({ error: "Failed to save user" });
                 });
             }
           })
           .catch((error) => {
-            // Handle error while checking if user exists
             res.status(500).json({ error: "Failed to verify user" });
           });
       } else {
-        // Incorrect OTP
         res.status(400).json({ error: "Incorrect OTP" });
       }
     })
     .catch((error) => {
-      // Handle error while verifying OTP
       res.status(500).json({ error: "Failed to verify OTP" });
     });
 });
-// Endpoint to get all topics from other users
+
 app.get("/api/topics", async (req, res) => {
   try {
     const topics = await Topic.find()
-      .populate("user", "name email") // Populate specific user fields if needed
+      .populate("user", "name email") 
       .populate({
         path: "comments",
         populate: {
@@ -163,13 +152,11 @@ app.post("/api/topics", async (req, res) => {
   const { userId, content } = req.body;
 
   try {
-    // Create a new topic
     const newTopic = new Topic({
       user: userId,
       content: content,
     });
 
-    // Save the topic to the database
     await newTopic.save();
 
     res.json(newTopic);
@@ -184,7 +171,6 @@ app.post("/api/topics/:topicId/comments", async (req, res) => {
   const topicId = req.params.topicId;
 
   try {
-    // Check if the topic with the given ID exists
     const topic = await Topic.findById(topicId);
 
     if (!topic) {
@@ -208,39 +194,41 @@ app.post("/api/topics/:topicId/comments", async (req, res) => {
     res.status(500).json({ error: "Failed to post comment" });
   }
 });
-app.post("/api/topics/:topicId/comments/:commentId/replies", async (req, res) => {
-  const { userId, content } = req.body;
-  const topicId = req.params.topicId;
-  const commentId = req.params.commentId;
+app.post(
+  "/api/topics/:topicId/comments/:commentId/replies",
+  async (req, res) => {
+    const { userId, content } = req.body;
+    const topicId = req.params.topicId;
+    const commentId = req.params.commentId;
 
-  try {
-    // Check if the comment with the given ID exists and belongs to the topic with the given ID.
-    const comment = await Comment.findById(commentId);
+    try {
+      // Check if the comment with the given ID exists and belongs to the topic with the given ID.
+      const comment = await Comment.findById(commentId);
 
-    // Create a new Comment object with the following properties:
-    const newReply = new Comment({
-      user: userId,
-      content: content,
-      replies: [],
-    });
+      // Create a new Comment object with the following properties:
+      const newReply = new Comment({
+        user: userId,
+        content: content,
+        replies: [],
+      });
 
-    // Save the new Comment object to the database.
-    await newReply.save();
+      // Save the new Comment object to the database.
+      await newReply.save();
 
-    // Add the new Comment object to the replies array of the original comment.
-    comment.replies.push(newReply);
+      // Add the new Comment object to the replies array of the original comment.
+      comment.replies.push(newReply);
 
-    // Update the original comment in the database.
-    await comment.save();
+      // Update the original comment in the database.
+      await comment.save();
 
-    // Return a success response with the new Comment object.
-    res.json(newReply);
-  } catch (error) {
-    console.error("Error posting reply:", error);
-    res.status(500).json({ error: "Failed to post reply" });
+      // Return a success response with the new Comment object.
+      res.json(newReply);
+    } catch (error) {
+      console.error("Error posting reply:", error);
+      res.status(500).json({ error: "Failed to post reply" });
+    }
   }
-});
-
+);
 
 // Start the server
 app.listen(port, () => {

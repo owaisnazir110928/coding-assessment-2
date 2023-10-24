@@ -152,7 +152,6 @@ app.get("/api/topics", async (req, res) => {
           },
         },
       });
-
     res.json(topics);
   } catch (error) {
     res.status(500).json({ error: "Failed to fetch topics" });

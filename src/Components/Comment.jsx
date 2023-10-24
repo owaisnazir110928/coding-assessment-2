@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import styles from "./Style/Comment.module.css";
 
@@ -6,6 +6,23 @@ const Comment = ({ comment, topicId }) => {
   const [replyContent, setReplyContent] = useState("");
   const [viewReplies, setViewReplies] = useState(false);
   const [commentReplies, setCommentReplies] = useState(comment.replies);
+  const [userName, setUserName] = useState(""); // State to store user's name
+
+  // Fetch user details based on the user ID
+  useEffect(() => {
+    const fetchUserDetails = async () => {
+      try {
+        const response = await axios.get(
+          `https://codinground.onrender.com/api/users/${comment.user}`
+        );
+        setUserName(response.data.name);
+      } catch (error) {
+        console.error("Error fetching user details:", error);
+      }
+    };
+
+    fetchUserDetails();
+  }, [comment.user]); // Fetch user details when the user ID changes
 
   const handlePostReply = () => {
     const userId = localStorage.getItem("userId");
@@ -61,6 +78,7 @@ const Comment = ({ comment, topicId }) => {
           </div>
         </>
       )}
+      <p className={styles.userName}>User: {userName}</p>
     </div>
   );
 };

@@ -230,6 +230,30 @@ app.post(
   }
 );
 
+app.get("/api/users/:userId", async (req, res) => {
+  const userId = req.params.userId;
+
+  try {
+    // Fetch user details from the database based on the provided user ID
+    const user = await User.findById(userId);
+    if (user) {
+      // If user found, send user details in the response
+      res.json({
+        name: user.name,
+        email: user.email,
+        // Add more user properties if needed
+      });
+    } else {
+      // If user not found, send a 404 response
+      res.status(404).json({ error: "User not found" });
+    }
+  } catch (error) {
+    // If an error occurs, send a 500 response
+    console.error("Error fetching user details:", error);
+    res.status(500).json({ error: "Failed to fetch user details" });
+  }
+});
+
 // Start the server
 app.listen(port, () => {
   console.log(`Server listening at ${port}`);

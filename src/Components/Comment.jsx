@@ -35,8 +35,6 @@ const Comment = ({ comment, topicId }) => {
       .then((response) => {
         console.log("Reply posted:", response.data);
         setReplyContent("");
-
-        // Update the local state with the new reply
         setCommentReplies([...commentReplies, response.data]);
       })
       .catch((error) => {

@@ -210,28 +210,16 @@ app.post(
     const { userId, content } = req.body;
     const topicId = req.params.topicId;
     const commentId = req.params.commentId;
-
     try {
-      // Check if the comment with the given ID exists and belongs to the topic with the given ID.
       const comment = await Comment.findById(commentId);
-
-      // Create a new Comment object with the following properties:
       const newReply = new Comment({
         user: userId,
         content: content,
         replies: [],
       });
-
-      // Save the new Comment object to the database.
       await newReply.save();
-
-      // Add the new Comment object to the replies array of the original comment.
       comment.replies.push(newReply);
-
-      // Update the original comment in the database.
       await comment.save();
-
-      // Return a success response with the new Comment object.
       res.json(newReply);
     } catch (error) {
       console.error("Error posting reply:", error);

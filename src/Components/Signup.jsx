@@ -88,7 +88,11 @@ const SignUpForm = () => {
         onChange={handleInputChange}
         required
       />
-      {otpSent && <p className={styles.success}>{"OTP Sent Successfully. Valid for 2 mins"}</p>}
+      {otpSent && (
+        <p className={styles.success}>
+          {"OTP Sent Successfully. Valid for 2 mins"}
+        </p>
+      )}
       {!otpSent ? (
         <button
           type="button"
@@ -112,6 +116,14 @@ const SignUpForm = () => {
             {loading && "Loading..."}
             {!loading && "Verify and Sign Up"}
           </button>
+          <div
+            className={styles.reset}
+            onClick={() => {
+              window.location.reload();
+            }}
+          >
+            reset
+          </div>
         </div>
       )}
     </form>

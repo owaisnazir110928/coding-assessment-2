@@ -28,6 +28,8 @@
     border: 0.5px dotted grey;
     border-radius: 10px;
     padding: 5px;
+    outline: none;
+    resize: none;
 }
 
 .commentInputContainer {

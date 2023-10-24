@@ -17,8 +17,7 @@
     padding: 20px;
     margin: 10px 0;
     box-sizing: border-box;
-    border: 1px solid #ccc;
-    border-radius: 10px;
+    box-shadow: 0 0 0 2px rgba(218, 102, 123, 1), 8px 8px 0 0 rgba(218, 102, 123, 1);
 }
 
 .allTopics {
@@ -41,6 +40,8 @@
     margin-bottom: 10px;
     font-size: 18px;
     box-sizing: border-box;
+    outline: none;
+    resize: none;
 }
 
 

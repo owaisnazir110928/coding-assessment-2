@@ -24,7 +24,9 @@
     align-items: center;
     flex-direction: row;
     width: 180px;
-    border: none;
+    height: 38px;
+    border: 0.5px dotted grey;
+    border-radius: 10px;
     padding: 5px;
 }
 
@@ -50,7 +52,7 @@
 }
 
 .icon {
-    width: 20px;
+    width: 16px;
 }
 
 .iconContainer {
@@ -58,13 +60,14 @@
     align-items: center;
     cursor: pointer;
     gap: 5px;
+    color: rgb(102, 102, 102);
+    font-size: 14px;
     margin-top: 6px;
     margin-left: 5px;
 }
 
 .commentContainer {
     margin-top: 8px;
-    border: 0.5px solid grey;
     padding: 5px;
     border-radius: 5px;
 }

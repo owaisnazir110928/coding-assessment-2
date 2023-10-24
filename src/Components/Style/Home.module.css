@@ -1,3 +1,8 @@
+.extraCont{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
 .container {
     display: flex;
     justify-content: center;
@@ -5,6 +10,7 @@
     width: 100vw;
     padding: 20px;
     gap: 50px;
+    margin-top: 50px;
 }
 
 .topicContainer {

@@ -3,6 +3,7 @@ import axios from "axios";
 import Topic from "./Topic";
 import styles from "./Style/Home.module.css";
 import { Discuss } from "react-loader-spinner";
+import Navbar from "./Navbar";
 
 const Home = () => {
   const [topics, setTopics] = useState([]);
@@ -42,40 +43,43 @@ const Home = () => {
   }, [topics.length]);
 
   return (
-    <div className={styles.container}>
-      <div className={styles.topicContainer}>
-        <h2>Post a New Topic</h2>
-        <textarea
-          className={styles.textarea}
-          value={topicContent}
-          onChange={(e) => setTopicContent(e.target.value)}
-          placeholder="What's on Your Mind..."
-        />
-        <button className={styles.button} onClick={handlePostTopic}>
-          Post Topic
-        </button>
-      </div>
-      <div className={styles.allTopics}>
-        <h1 className={styles.heading}>Home</h1>
-        {loading && (
-          <div className={styles.loader}>
-            <Discuss
-              visible={true}
-              height="130"
-              width="130"
-              ariaLabel="comment-loading"
-              wrapperStyle={{}}
-              wrapperClass="comment-wrapper"
-              color="#fff"
-              backgroundColor="#F4442E"
-            />
-          </div>
-        )}
-        {topics.map((topic) => (
-          <div key={topic._id}>
-            <Topic topic={topic} />
-          </div>
-        ))}
+    <div className={styles.extraCont}>
+    <Navbar  />
+      <div className={styles.container}>
+        <div className={styles.topicContainer}>
+          <h2>Post a New Topic</h2>
+          <textarea
+            className={styles.textarea}
+            value={topicContent}
+            onChange={(e) => setTopicContent(e.target.value)}
+            placeholder="What's on Your Mind..."
+          />
+          <button className={styles.button} onClick={handlePostTopic}>
+            Post Topic
+          </button>
+        </div>
+        <div className={styles.allTopics}>
+          <h1 className={styles.heading}>Home</h1>
+          {loading && (
+            <div className={styles.loader}>
+              <Discuss
+                visible={true}
+                height="130"
+                width="130"
+                ariaLabel="comment-loading"
+                wrapperStyle={{}}
+                wrapperClass="comment-wrapper"
+                color="#fff"
+                backgroundColor="#F4442E"
+              />
+            </div>
+          )}
+          {topics.map((topic) => (
+            <div key={topic._id}>
+              <Topic topic={topic} />
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   );

@@ -16,7 +16,12 @@ const Home = () => {
       })
       .then((response) => {
         console.log("Topic posted:", response.data);
-        window.location.reload();
+
+        // Update the local state with the new topic
+        setTopics([response.data, ...topics]);
+        
+        // Clear the topic content input field
+        setTopicContent("");
       })
       .catch((error) => {
         console.error("Error posting topic:", error);

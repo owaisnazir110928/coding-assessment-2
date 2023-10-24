@@ -1,9 +1,11 @@
 import React, { useState } from "react";
 import axios from "axios";
 import styles from "./Style/Comment.module.css";
+
 const Comment = ({ comment, topicId }) => {
   const [replyContent, setReplyContent] = useState("");
   const [viewReplies, setViewReplies] = useState(false);
+  const [commentReplies, setCommentReplies] = useState(comment.replies);
 
   const handlePostReply = () => {
     const userId = localStorage.getItem("userId");
@@ -19,7 +21,9 @@ const Comment = ({ comment, topicId }) => {
       .then((response) => {
         console.log("Reply posted:", response.data);
         setReplyContent("");
-        window.location.reload();
+
+        // Update the local state with the new reply
+        setCommentReplies([...commentReplies, response.data]);
       })
       .catch((error) => {
         console.error("Error posting reply:", error);
@@ -35,11 +39,11 @@ const Comment = ({ comment, topicId }) => {
           setViewReplies(!viewReplies);
         }}
       >
-        {`View Replies (${comment.replies.length})`}
+        {`View Replies (${commentReplies.length})`}
       </div>
       {viewReplies && (
         <>
-          {comment.replies.map((reply) => (
+          {commentReplies.map((reply) => (
             <div key={reply._id} className={styles.reply}>
               <p className={styles.replyContent}>{reply.content}</p>
             </div>

@@ -41,7 +41,7 @@ const Topic = ({ topic }) => {
 
   return (
     <div className={styles.topic}>
-      <h1>{topic.user.name}</h1>
+      <h1 className={styles.name}>{topic.user.name}</h1>
       <p className={styles.topicContent}>{topic.content}</p>
       <div
         className={styles.iconContainer}

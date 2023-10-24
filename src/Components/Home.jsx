@@ -33,7 +33,6 @@ const Home = () => {
       .get("https://codinground.onrender.com/api/topics")
       .then((response) => {
         setTopics(response.data.reverse());
-        console.log(response.data);
       })
       .catch((error) => {
         console.error("Error fetching topics:", error);

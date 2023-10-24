@@ -19,11 +19,8 @@ const Comment = ({ comment, topicId }) => {
         console.error("Error fetching user details:", error);
       }
     };
-
-    // Fetch user details when the component mounts for the original comment
     fetchUserDetails(comment.user);
-  }, [comment.user]); // Fetch user details when the user ID changes
-
+  }, [comment.user]);
   const handlePostReply = () => {
     const userId = localStorage.getItem("userId");
 

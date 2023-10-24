@@ -11,31 +11,40 @@
 }
 
 .reply {
+    margin-top: 5px;
     margin-left: 20px;
-    padding: 5px;
-    background-color: #f5f5f5;
 }
 
 .replyContent {
     font-size: 14px;
     margin-bottom: 5px;
+    background-color: #f5f5f5;
+    padding: 10px;
+}
+
+.replyInputContainer {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    gap: 5px;
 }
 
 .replyInput {
-    margin-top: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    width: 180px;
     border: none;
-    border-radius: 10px;
-    padding: 10px;
-    margin-bottom: 10px;
-    font-size: 18px;
-    box-sizing: border-box;
+    padding: 2px;
+    margin-left: 20px;
 }
 
 .button {
     background-color: #007bff;
     color: white;
     border: none;
-    padding: 10px 20px;
+    padding: 5px 10px;
     cursor: pointer;
     border-radius: 5px;
     transition: background-color 0.3s ease;

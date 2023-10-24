@@ -44,7 +44,7 @@ const Comment = ({ comment, topicId }) => {
               <p className={styles.replyContent}>{reply.content}</p>
             </div>
           ))}
-          <div>
+          <div className={styles.replyInputContainer}>
             <textarea
               className={styles.replyInput}
               value={replyContent}

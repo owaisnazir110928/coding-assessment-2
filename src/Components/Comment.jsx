@@ -6,9 +6,7 @@ const Comment = ({ comment, topicId }) => {
   const [replyContent, setReplyContent] = useState("");
   const [viewReplies, setViewReplies] = useState(false);
   const [commentReplies, setCommentReplies] = useState(comment.replies);
-  const [userName, setUserName] = useState(""); // State to store user's name
-
-  // Fetch user details based on the user ID
+  const [userName, setUserName] = useState(""); 
   useEffect(() => {
     const fetchUserDetails = async () => {
       try {

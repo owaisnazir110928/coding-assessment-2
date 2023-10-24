@@ -47,6 +47,8 @@ const Comment = ({ comment, topicId }) => {
 
   return (
     <div className={styles.comment}>
+
+<p className={styles.userName}>{`${userName}: `}</p>
       <p className={styles.commentContent}>{comment.content}</p>
       <div
         className={styles.viewReplies}
@@ -76,7 +78,6 @@ const Comment = ({ comment, topicId }) => {
           </div>
         </>
       )}
-      <p className={styles.userName}>User: {userName}</p>
     </div>
   );
 };

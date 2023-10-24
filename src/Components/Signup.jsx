@@ -74,7 +74,7 @@ const SignUpForm = () => {
         name="name"
         placeholder="Name"
         value={formData.name}
-        disabled={loading}
+        disabled={otpSent}
         onChange={handleInputChange}
         required
       />
@@ -84,10 +84,11 @@ const SignUpForm = () => {
         name="email"
         placeholder="Email"
         value={formData.email}
-        disabled={loading}
+        disabled={otpSent}
         onChange={handleInputChange}
         required
       />
+      {otpSent && <p className={styles.success}>{"OTP Sent Successfully"}</p>}
       {!otpSent ? (
         <button
           type="button"

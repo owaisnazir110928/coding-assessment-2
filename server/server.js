@@ -134,11 +134,22 @@ app.post("/api/verify-otp", (req, res) => {
 app.get("/api/topics", async (req, res) => {
   try {
     const topics = await Topic.find()
-      .populate("user", "name email")
+      .populate({
+        path: "user",
+        select: "name email",
+      })
       .populate({
         path: "comments",
         populate: {
-          path: "replies", // Populate replies to comments as well if needed
+          path: "user",
+          select: "name email",
+        },
+        populate: {
+          path: "replies",
+          populate: {
+            path: "user",
+            select: "name email",
+          },
         },
       });
 

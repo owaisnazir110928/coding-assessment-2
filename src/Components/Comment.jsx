@@ -6,9 +6,10 @@ const Comment = ({ comment, topicId }) => {
   const [replyContent, setReplyContent] = useState("");
   const [viewReplies, setViewReplies] = useState(false);
   const [commentReplies, setCommentReplies] = useState(comment.replies);
-  const [userName, setUserName] = useState(""); 
+  const [userName, setUserName] = useState("");
+
   useEffect(() => {
-    const fetchUserDetails = async () => {
+    const fetchUserDetails = async (userId) => {
       try {
         const response = await axios.get(
           `https://codinground.onrender.com/api/users/${comment.user}`
@@ -19,7 +20,8 @@ const Comment = ({ comment, topicId }) => {
       }
     };
 
-    fetchUserDetails();
+    // Fetch user details when the component mounts for the original comment
+    fetchUserDetails(comment.user);
   }, [comment.user]); // Fetch user details when the user ID changes
 
   const handlePostReply = () => {
@@ -47,9 +49,10 @@ const Comment = ({ comment, topicId }) => {
 
   return (
     <div className={styles.comment}>
-
-<p className={styles.userName}>{`${userName}: `}</p>
-      <p className={styles.commentContent}>{comment.content}</p>
+      <p className={styles.commentContent}>
+        <span className={styles.userName}>{`${userName}: `}</span>
+        {comment.content}
+      </p>
       <div
         className={styles.viewReplies}
         onClick={() => {
@@ -62,7 +65,12 @@ const Comment = ({ comment, topicId }) => {
         <>
           {commentReplies.map((reply) => (
             <div key={reply._id} className={styles.reply}>
-              <p className={styles.replyContent}>{reply.content}</p>
+              <p className={styles.replyContent}>
+                <span
+                  className={styles.userName}
+                >{`${reply.user.name}: `}</span>
+                {reply.content}
+              </p>
             </div>
           ))}
           <div className={styles.replyInputContainer}>

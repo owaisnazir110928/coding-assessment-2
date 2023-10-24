@@ -59,3 +59,8 @@
     color: blue;
     cursor: pointer;
 }
+
+.userName {
+    color: rgb(158, 0, 0);
+    font-size: 15px;
+}

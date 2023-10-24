@@ -13,16 +13,20 @@
     font-weight: 800;
     font-size: 36px;
     text-align: center;
+    padding: 10px;
+    font-weight: bold;
 }
 
 .input {
     width: 400px;
     height: 45px;
     font-size: 18px;
-    padding: 10px;
-    border: 0.5px solid grey;
-    border-radius: 10px;
+    border-radius: 8px;
     box-sizing: border-box;
+    background-color: #e2e2e2;
+    border: none;
+    outline: none;
+    padding: 12px 20px;
 }
 
 .input[disabled] {
@@ -33,15 +37,16 @@
 .button {
     width: 400px;
     height: 45px;
-    font-size: 18px;
-    padding: 10px;
-    background-color: #33b249;
-    color: white;
     font-weight: bold;
-    border: 0.5px solid grey;
-    border-radius: 10px;
+    border-radius: 8px;
     cursor: pointer;
     box-sizing: border-box;
+    background-color: #4796ff;
+    color: #ffffff;
+    font-size: 18px;
+    outline: none;
+    border: none;
+    padding: 8px 15px;
 }
 
 .secondCont {
@@ -69,6 +74,6 @@
 
 .reset {
     text-decoration: underline;
-    color: blue;
+    color: #4796ff;
     cursor: pointer;
 }

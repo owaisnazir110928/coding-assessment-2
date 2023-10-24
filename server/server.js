@@ -16,6 +16,7 @@ mongoose
     {
       useNewUrlParser: true,
       useUnifiedTopology: true,
+      useCreateIndex: true,
     }
   )
   .then(() => {
@@ -44,6 +45,11 @@ const User = mongoose.model("User", userSchema);
 const otpSchema = new mongoose.Schema({
   email: String,
   code: String,
+  createdAt: {
+    type: Date,
+    default: Date.now,
+    expires: 120,
+  },
 });
 
 const OTP = mongoose.model("OTP", otpSchema);

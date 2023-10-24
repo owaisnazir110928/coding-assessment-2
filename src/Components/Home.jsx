@@ -17,6 +17,7 @@ const Home = () => {
       .then((response) => {
         console.log("Topic posted:", response.data);
         setTopics([response.data, ...topics]);
+        window.location.reload();
         setTopicContent("");
       })
       .catch((error) => {

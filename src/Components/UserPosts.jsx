@@ -4,7 +4,6 @@ import Topic from "./Topic";
 import styles from "./Style/Home.module.css";
 import { Discuss } from "react-loader-spinner";
 import Navbar from "./Navbar";
-
 const UserPosts = () => {
   const [topics, setTopics] = useState([]);
   const userId = localStorage.getItem("userId");
@@ -13,12 +12,9 @@ const UserPosts = () => {
   useEffect(() => {
     setLoading(true);
     axios
-      .get("https://codinground.onrender.com/api/topics")
+      .get(`https://codinground.onrender.com/api/topics/user/${userId}`)
       .then((response) => {
-        const userTopics = response.data.filter((topic) => {
-          topic.user._id == userId;
-        });
-        setTopics(userTopics.reverse());
+        setTopics(response.data.reverse());
         setLoading(false);
       })
       .catch((error) => {
@@ -26,7 +22,6 @@ const UserPosts = () => {
         setLoading(false);
       });
   }, [topics.length]);
-
   return (
     <div className={styles.extraCont}>
       <Navbar />

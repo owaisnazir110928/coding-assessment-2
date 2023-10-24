@@ -257,6 +257,37 @@ app.get("/api/users/:userId", async (req, res) => {
   }
 });
 
+app.get("/api/topics/user/:userId", async (req, res) => {
+  const userId = req.params.userId;
+
+  try {
+    const topics = await Topic.find({ user: userId })
+      .populate({
+        path: "user",
+        select: "name email",
+      })
+      .populate({
+        path: "comments",
+        populate: {
+          path: "user",
+          select: "name email",
+        },
+        populate: {
+          path: "replies",
+          populate: {
+            path: "user",
+            select: "name email",
+          },
+        },
+      });
+
+    res.json(topics);
+  } catch (error) {
+    console.error("Error fetching topics:", error);
+    res.status(500).json({ error: "Failed to fetch topics" });
+  }
+});
+
 // Start the server
 app.listen(port, () => {
   console.log(`Server listening at ${port}`);

@@ -50,7 +50,8 @@ const Topic = ({ topic }) => {
         }}
       >
         <img src={cmtIcon} alt="icon" className={styles.icon} />
-        {` View Comments (${comments.length})`}
+        {!viewComments && ` View Comments (${comments.length})`}
+        {viewComments && ` Hide Comments (${comments.length})`}
       </div>
       {viewComments && (
         <div className={styles.commentContainer}>
@@ -64,15 +65,15 @@ const Topic = ({ topic }) => {
             />
           ))}
           <div className={styles.commentInputContainer}>
-          <textarea
-            className={styles.commentInput}
-            value={commentContent}
-            onChange={(e) => setCommentContent(e.target.value)}
-            placeholder="Comment on this topic..."
-          />
-          <button onClick={handlePostComment} className={styles.button}>
-            Post Comment
-          </button>
+            <textarea
+              className={styles.commentInput}
+              value={commentContent}
+              onChange={(e) => setCommentContent(e.target.value)}
+              placeholder="Comment on this topic..."
+            />
+            <button onClick={handlePostComment} className={styles.button}>
+              Post Comment
+            </button>
           </div>
         </div>
       )}

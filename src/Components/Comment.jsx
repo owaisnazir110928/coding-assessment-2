@@ -54,7 +54,8 @@ const Comment = ({ comment, topicId }) => {
           setViewReplies(!viewReplies);
         }}
       >
-        {`View Replies (${commentReplies.length})`}
+        {!viewReplies && `View Replies (${commentReplies.length})`}
+        {viewReplies && `Hide Replies (${commentReplies.length})`}
       </div>
       {viewReplies && (
         <>

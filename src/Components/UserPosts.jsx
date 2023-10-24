@@ -43,6 +43,11 @@ const UserPosts = () => {
               />
             </div>
           )}
+          {topics.length === 0 && (
+            <p style={{ color: "red", marginTop: "40px" }}>
+              ....No Topics Posted Yet....
+            </p>
+          )}
           {topics.map((topic) => (
             <div key={topic._id}>
               <Topic topic={topic} />

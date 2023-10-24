@@ -21,6 +21,7 @@ const Comment = ({ comment, topicId }) => {
     };
     fetchUserDetails(comment.user);
   }, [comment.user]);
+
   const handlePostReply = () => {
     const userId = localStorage.getItem("userId");
 
